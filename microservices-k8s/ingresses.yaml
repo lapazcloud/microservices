@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: microservices
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: microservices.lapazcloud.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ui
+          servicePort: 80
+      - path: /api
+        backend:
+          serviceName: api
+          servicePort: 8000
+      - path: /admin
+        backend:
+          serviceName: api
+          servicePort: 8000
+      - path: /static
+        backend:
+          serviceName: api
+          servicePort: 8000

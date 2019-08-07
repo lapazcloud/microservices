@@ -27,4 +27,11 @@ python manage.py migrate
 python manage.py createsuperuser
 # (follow the prompts to complete this step)
 
+# Deploy Traefik
+kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-rbac.yaml
+kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
+
+# Deploy the ingresses
+kubectl create -f ingresses.yaml
+
 ```
