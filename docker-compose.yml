@@ -1,0 +1,31 @@
+version: "3.4"
+services:
+  ui:
+    build:
+      context: microservices-ui/
+      target: dev
+    image: lapazcloud/microservices-ui:dev
+    ports:
+      - 8000:8000
+    volumes:
+      - /ui/node_modules
+      - ./microservices-ui:/ui
+  api:
+    build:
+      context: microservices-api/
+      target: dev
+    image: lapazcloud/microservices-api:dev
+    ports:
+      - 5000:5000
+    env_file:
+      - microservices.env
+    volumes:
+      - ./microservices-api:/api
+  db:
+    image: postgres:alpine
+    volumes:
+      - /var/lib/postgresql/data
+    env_file:
+      - microservices.env
+    ports:
+      - 5432:5432
